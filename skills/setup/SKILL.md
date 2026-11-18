@@ -23,9 +23,11 @@ Recommended logical structure:
 ```
 job-hunt/
 ├── WORKSPACE.md
+├── ats-playbooks/      # learned routes through application portals, no personal data
 └── profiles/<slug>/
     ├── profile.md
     ├── rules.md
+    ├── memory.md      # voice, company history, application history
     ├── resumes/
     ├── resume-lab/
     ├── applications/
@@ -71,11 +73,14 @@ Turn the answers into priority, stretch and low-priority role lists. Suggest com
 **Round 6: resume variants and scoring.**
 - If one resume serves every target, one variant is fine. If their targets split (for example writing roles and strategy roles), propose two or three variant names with a one-line emphasis each, and save the uploaded resume as the first. They can add tailored files later, or the `tailor` skill can draft them.
 - Show the default scoring weights in one line and ask if any matter more or less to them. Typical changes: academics weight Growth up and Comp down; parents weight Work-Life up. Weights must sum to 100, so rebalance for them.
-- Autonomy: explain the three levels in two sentences each and recommend `draft`. If they choose `assisted-apply`, tell them once that several job boards, LinkedIn among them, prohibit automated applications and can restrict accounts.
+- Autonomy: explain the three levels in two sentences each and recommend `draft`. If they choose `assisted-apply`, tell them once that several job boards, LinkedIn among them, prohibit automated applications and can restrict accounts. Then ask about `board_apply`: with `guided` (recommended) the agent fills employer careers sites and ATS forms, and walks them through job-board forms like LinkedIn Easy Apply with a fill card; with `assist` the agent fills job-board forms too. Say plainly that `assist` is the setting that carries the account risk, and that the risk falls on their own account. Record their choice.
+- Mode: ask what plan they run on. `full` sends company research and form filling to the plugin's agents in parallel, which is faster and keeps long batches sharp but uses more of the plan's usage limits. `lite` runs everything in one thread with batches of at most five roles, which suits free or low-limit plans. Recommend `full` for paid plans and `lite` for free ones. If the platform cannot run plugin agents at all (standalone skill uploads, ChatGPT), set `lite` without asking.
+
+**Round 7: voice (optional, skip if they are in a hurry).** Ask for one to three things they wrote themselves without AI help: an old cover letter, a LinkedIn post, an email to a recruiter. Read them and note how they write: sentence length, formality, words they favour, words they never use, how they open and close. Show the notes back and ask them to confirm or correct. Confirmed notes go into `memory.md` under Voice. This is what lets drafts sound like the person who will sign them.
 
 ## Write the files
 
-1. Fill `profile.md` and `rules.md` from the templates.
+1. Fill `profile.md`, `rules.md` and `memory.md` from the templates. Create an empty `ats-playbooks/` folder at the workspace root.
 2. Copy uploaded resumes into `resumes/` with clear names. Create `resume-lab/` for durable audits and JD-match reports.
 3. Create the tracker with the profile's weights, running from the workspace root:
    ```bash
@@ -83,7 +88,7 @@ Turn the answers into priority, stretch and low-priority role lists. Suggest com
    ```
    `<tracker.py>` is `<this-skill-dir>/../job-hunt/scripts/tracker.py` when the plugin is installed whole, or `<this-skill-dir>/scripts/tracker.py` when this skill was uploaded on its own. It needs `openpyxl`; install it if the import fails. If the user chose a Google Sheet, build the same columns and dropdowns there instead.
 4. Write or update `WORKSPACE.md`, setting the active profile.
-5. Show the user a short summary: target roles, comp bands, locations, hard filters, weights, autonomy. Ask them to confirm. Then offer to run a baseline resume audit with `resume-lab` and/or a first batch with `job-hunt`.
+5. Show the user a short summary: target roles, comp bands, locations, hard filters, weights, autonomy, mode. Ask them to confirm. Then offer to run a baseline resume audit with `resume-lab` and/or a first batch with `job-hunt`.
 
 ## Editing an existing profile
 

@@ -9,7 +9,9 @@ comp_target: {{NUMBER}}
 comp_stretch: {{NUMBER}}
 tracker: tracker.xlsx
 autonomy: draft            # research-only | draft | assisted-apply
-batch_size: 15
+board_apply: guided        # guided (user fills job-board forms with a fill card) | assist (agent fills them too; account risk)
+mode: full                 # full (agents, parallel research) | lite (single thread, for free or low-limit plans)
+batch_size: 15             # lite mode caps this at 5
 max_posting_age_days: 30
 weights: {role: 25, skills: 15, growth: 15, comp: 15, company: 10, reviews: 10, worklife: 5, location: 5}
 thresholds: {priority: 80, apply: 70, review: 60}

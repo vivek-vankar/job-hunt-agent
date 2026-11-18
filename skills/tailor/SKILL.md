@@ -17,6 +17,7 @@ When a JD is available and `resume-lab` is installed, prefer running its JD Matc
 3. The resume variant named in the tracker row, from `resumes/`.
 4. The full job description. If you only have a title, fetch the JD or ask for it.
 5. The tracker row's review summary, for anything worth addressing (a company known for valuing a skill the user has).
+6. `profiles/<slug>/memory.md` if it exists: the Voice notes, the Edits the user made to past drafts, and Company history for this employer.
 
 ## The truth rule
 
@@ -34,6 +35,11 @@ Before you return any draft, run this check line by line: point to the profile l
 - Keep dates, titles and employers exactly as in the profile.
 - Save as `applications/<ID>-<company>-<role>/resume.<ext>` matching the source format. Read the docx or pdf skill first when producing those formats.
 
+## Writing in the user's voice
+Drafts go out under the user's name, so they should read as the user wrote them on a good day. Follow the Voice notes in `memory.md`, and where they disagree, follow the Edits the user made to past drafts, since those are newer and come straight from the user. Without voice notes, write plainly and directly and offer once to learn their style (setup Round 7).
+
+Voice shapes wording only. It never adds a claim, and the truth rule below still decides what can be said.
+
 ## Cover letter
 Under 300 words unless the listing asks for more. Three movements: why this role at this company (specific, drawn from research), the two most relevant proofs from the profile, and a plain close. Match the user's register: no clichés like "I am writing to express my keen interest". Save as `cover-letter.md` (or the format the user prefers).
 
@@ -47,6 +53,8 @@ For each application, tell the user:
 - what you emphasised and why, in two lines
 - gaps against the JD the user may want to address in interview
 - any form questions waiting on them
+
+When the user rewrites part of a draft, note in `memory.md` under Edits the user made to drafts what changed and what it shows ("cut every adjective in the opening", "prefers 'built' to 'spearheaded'"), one line each. Ask before saving if the lesson isn't obvious.
 
 Then update the tracker row, running from the workspace root:
 ```bash

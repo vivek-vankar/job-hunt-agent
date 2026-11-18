@@ -2,7 +2,7 @@
 
 # Job Hunt Agent
 
-**v1.0.0 — First public release** · Open-source agent core · MIT License
+**v1.1.0** · agents, candidate memory and guided fill · Open-source agent core · MIT License
 
 An open-source career agent for anyone, in any country and any occupation. One set of skills runs on Claude (Claude Code, Cowork, claude.ai) and on ChatGPT / Codex, with a manifest for each platform.
 
@@ -23,6 +23,8 @@ Five skills: `setup`, `job-hunt`, `resume-lab`, `tailor` and `follow-up`. The sk
 | ChatGPT (Agent Plugins 1.0) | `plugin.json` |
 | Codex | `.codex-plugin/plugin.json` |
 | claude.ai chat, any skills-only host | standalone skill zips built by `tools/package_skills.py` |
+
+On Claude Code and Cowork the plugin also ships two agents (see Agents and modes). Other hosts run the same skills in lite mode.
 
 Where available, the skills can also use connected Google Drive / Google Sheets, email and calendar. User-specific candidate data always stays outside the public core.
 
@@ -121,7 +123,24 @@ Role fit 25 · Skills fit 15 · Growth 15 · Compensation 15 · Company 10 · Re
 | `draft` | Also prepares tailored materials; you submit | ✓ |
 | `assisted-apply` | Also fills forms in a browser for roles you approved, pausing before each submit | |
 
-Several job boards, LinkedIn among them, prohibit automated applications in their terms and can restrict accounts that use them. Choose `assisted-apply` knowing that. Some things are never automated at any level: passwords, OTPs, ID numbers, bank details, payments, legal declarations, and voluntary demographic / equal-opportunity questions.
+Several job boards, LinkedIn among them, prohibit automated applications in their terms and can restrict accounts that use them. Choose `assisted-apply` knowing that. Filling job-board-hosted forms (LinkedIn Easy Apply, Naukri and similar) needs a second setting, `board_apply: assist`; the default, `guided`, walks you through those forms instead. Some things are never automated at any level: passwords, OTPs, ID numbers, bank details, payments, legal declarations, and voluntary demographic / equal-opportunity questions.
+
+## Agents and modes
+
+In **full** mode (Claude Code, Cowork) the `job-hunt` skill acts as the lead and hands work to two agents:
+
+| Agent | Model | Job |
+|---|---|---|
+| `company-researcher` | Sonnet | Researches one employer: reviews, news, red flags, scam check, evidence level. The lead sends one per company, in parallel. |
+| `application-operator` | Sonnet | Fills one approved application on the employer's careers site or ATS. Learns unfamiliar portals and records the route in `ats-playbooks/`. Stops at every login, consent box, self-ID question and free-text question, and never presses submit. |
+
+When a portal won't let the agent fill it (LinkedIn Easy Apply, Naukri, bot walls), it switches to **guided fill**: you get a fill card with every value ready to paste, help on each field as you go, and a check of the review screen before you submit.
+
+The lead stays the only writer to your tracker, profile and memory, so nothing an agent reads on the web gets saved without a check.
+
+**Lite** mode runs everything in one thread with batches of five. Pick it for free or low-limit plans; setup asks. If agents can't start on your platform, the run drops to lite on its own and tells you.
+
+**Candidate memory.** Each profile keeps a `memory.md`: notes on how you write (from samples you confirm), what you changed in past drafts, what happened at each company, and screening questions you've seen. Drafts follow your voice; the memory never adds a claim to your profile. The point is applications you'd recognise as your own, filed by you.
 
 ## Region packs
 
@@ -133,6 +152,7 @@ Several job boards, LinkedIn among them, prohibit automated applications in thei
 .claude-plugin/        Claude Code / Cowork: plugin.json + marketplace.json
 .codex-plugin/         Codex manifest
 plugin.json            ChatGPT (Agent Plugins 1.0) manifest
+agents/                company-researcher, application-operator (Claude Code / Cowork)
 tools/                 package_skills.py for standalone skill zips
 skills/
   setup/               onboarding and profile management, templates
@@ -156,7 +176,7 @@ skills/
 Maintained jointly by the project contributors. Public identities/handles can be added later in `CONTRIBUTORS.md`; Git history remains the canonical contribution record.
 
 ## Release
-This is the first public source release, **v1.0.0**. See [CHANGELOG.md](CHANGELOG.md) for what is included and [RELEASE_NOTES.md](RELEASE_NOTES.md) for known limitations. The project is currently a skill-based agent, not a hosted web service or finished UI.
+The first public source release was **v1.0.0**; **v1.1.0** adds the agents, candidate memory and guided fill. See [CHANGELOG.md](CHANGELOG.md) for what is included and [RELEASE_NOTES.md](RELEASE_NOTES.md) for known limitations. The project is currently a skill-based agent, not a hosted web service or finished UI.
 
 ## License
 MIT. See LICENSE.

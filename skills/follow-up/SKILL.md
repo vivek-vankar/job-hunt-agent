@@ -23,7 +23,7 @@ If an email connector is connected, search for each company in the active pipeli
 Open with the two or three actions that matter most today, then the rest grouped by status. Keep it short.
 
 ## 5. Update the tracker
-Apply only the changes the user confirmed. Update the same live tracker source that was read at the start of the follow-up review. Preserve existing formulas, validation, formatting and application history.
+Apply only the changes the user confirmed. Update the same live tracker source that was read at the start of the follow-up review. Preserve existing formulas, validation, formatting and application history. When a status changes (reply, assessment, interview, rejection, offer), add one dated line to the company's entry under Company history in `memory.md` if the file exists, so the next application to that employer knows what happened.
 
 ## Follow-up message drafts
-Short, specific, polite: the role, the date applied, one line of genuine interest or a relevant update, and an easy ask. Draft it; the user sends it.
+Write them in the user's voice from the Voice notes in `memory.md` when they exist. Short, specific, polite: the role, the date applied, one line of genuine interest or a relevant update, and an easy ask. Draft it; the user sends it.
